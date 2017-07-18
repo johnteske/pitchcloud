@@ -1,3 +1,5 @@
+---
+---
 var PitchCloud = {
     playing: false,
     masterLevel: 0.125
@@ -8,15 +10,14 @@ PitchCloud.context = (function() {
     return new AudioContext();
 })();
 
+{% include_relative _modules/vco.js %}
+
 var gainNode = PitchCloud.context.createGain();
 gainNode.gain.value = 0;
 gainNode.connect(PitchCloud.context.destination);
 
-var osc = PitchCloud.context.createOscillator();
-osc.type = 'sine';
-osc.frequency.value = 440;
+var osc = new PitchCloud.VCO();
 osc.connect(gainNode);
-osc.start();
 
 var playButton = document.getElementsByClassName('play')[0];
 
