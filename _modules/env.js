@@ -1,7 +1,7 @@
 PitchCloud.EnvelopeGenerator = (function(context) {
     function EnvelopeGenerator() {
-        this.attackTime = 2.0;
-        this.releaseTime = 2.0;
+        this.attackTime = 0.75;
+        this.releaseTime = 0.75;
     };
 
     EnvelopeGenerator.prototype.trigger = function() {

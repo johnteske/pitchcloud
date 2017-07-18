@@ -7,21 +7,29 @@ PitchCloud.Cloud = (function() {
         this._grains = [];
 
         for (var i = 0; i < this.size; i++) {
-            this._grains.push(new PitchCloud.Grain({
-                frequency: this.frequencies[i]
-            }, out));
+            this._grains.push(new PitchCloud.Grain({}, out));
         }
+
+        this._currentGrainIndex = 0;
     };
 
     Cloud.prototype._schedule = function(immediate) {
         var self = this,
-            delay = immediate ? 0 : self.grainLength * 1000;
+            delay = immediate ? 0 : self.grainLength * 1000,
+            thisGrain = self._grains[self._currentGrainIndex];
 
         this._timeout = setTimeout(function() {
-            var randomIndex = Math.floor(Math.random() * self.size);
-            self._grains[randomIndex].envelope.trigger();
+            var randomIndex = Math.floor(Math.random() * self.size),
+                frequency = self.frequencies[randomIndex];
+
+            thisGrain.vco.setFrequency(frequency);
+            thisGrain.envelope.trigger();
+
             self._schedule();
         }, delay);
+
+        self._currentGrainIndex++;
+        self._currentGrainIndex %= self.size;
     }
 
     Cloud.prototype.start = function() {
@@ -30,9 +38,11 @@ PitchCloud.Cloud = (function() {
 
     Cloud.prototype.stop = function() {
         clearTimeout(this._timeout);
-        for (var i = 0; i < this.size; i++) {
-            this._grains[i].envelope.cancel();
-        }
+        setTimeout(function () {
+            for (var i = 0; i < this.size; i++) {
+                this._grains[i].envelope.cancel();
+            }
+        }, PitchCloud.masterLag);
     }
 
     return Cloud;
