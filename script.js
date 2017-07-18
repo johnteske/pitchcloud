@@ -30,6 +30,7 @@ var playButton = document.getElementsByClassName('play')[0];
 playButton.addEventListener('click', function() {
     if (PitchCloud.isPlaying) {
         playButton.innerHTML = 'play';
+        cloud.stop();
         gainNode.gain.value = 0;
     } else {
         playButton.innerHTML = 'stop';

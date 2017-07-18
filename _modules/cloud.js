@@ -30,6 +30,9 @@ PitchCloud.Cloud = (function() {
 
     Cloud.prototype.stop = function() {
         clearTimeout(this._timeout);
+        for (var i = 0; i < this.size; i++) {
+            this._grains[i].envelope.cancel();
+        }
     }
 
     return Cloud;
