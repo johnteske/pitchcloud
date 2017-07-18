@@ -14,12 +14,16 @@ PitchCloud.context = (function() {
 {% include_relative _modules/vca.js %}
 {% include_relative _modules/env.js %}
 {% include_relative _modules/grain.js %}
+{% include_relative _modules/cloud.js %}
 
 var gainNode = PitchCloud.context.createGain();
 gainNode.gain.value = 0;
 gainNode.connect(PitchCloud.context.destination);
 
-var grain = new PitchCloud.Grain(gainNode);
+var cloud = new PitchCloud.Cloud({
+    frequencies: [440, 550, 660],
+    grainLength: 2.0
+}, gainNode);
 
 var playButton = document.getElementsByClassName('play')[0];
 
@@ -29,7 +33,7 @@ playButton.addEventListener('click', function() {
         gainNode.gain.value = 0;
     } else {
         playButton.innerHTML = 'stop';
-        grain.envelope.trigger();
+        cloud.start();
         gainNode.gain.value = PitchCloud.masterLevel;
     }
     PitchCloud.isPlaying = !PitchCloud.isPlaying;

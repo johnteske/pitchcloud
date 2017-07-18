@@ -1,8 +1,8 @@
 PitchCloud.VCO = (function(context) {
-  function VCO(){
+  function VCO(args){
     this.oscillator = context.createOscillator();
     this.oscillator.type = 'sine';
-    this.setFrequency(440);
+    this.setFrequency(args.frequency || 440);
     this.oscillator.start(0);
 
     this.input = this.oscillator;

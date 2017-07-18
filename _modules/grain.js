@@ -1,6 +1,6 @@
 PitchCloud.Grain = (function(context) {
-  function Grain(out) {
-      this.vco = new PitchCloud.VCO();
+  function Grain(args, out) {
+      this.vco = new PitchCloud.VCO({ frequency: args.frequency });
       this.vca = new PitchCloud.VCA();
       this.envelope = new PitchCloud.EnvelopeGenerator();
 
