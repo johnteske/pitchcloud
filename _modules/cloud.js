@@ -22,9 +22,9 @@ PitchCloud.Cloud = (function() {
          * Create controls
          */
 
-        var controls = this.controls = {
-            container: document.createElement('div')
-        };
+        var controls = this.controls = {}
+        controls.container = document.createElement('div');
+        controls.container.className = 'cloud';
 
         controls.frequencyInput = document.createElement('input');
         controls.frequencyInput.value = this.frequencies;

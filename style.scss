@@ -3,6 +3,17 @@
 html {
     font-family: monospace;
 }
+
+.clouds {
+    margin-bottom: 1em;
+}
+
+.cloud {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 1em;
+}
+
 button {
     width: 6em;
     height: 6em;
