@@ -22,8 +22,9 @@ gainNode.gain.value = 0;
 gainNode.connect(PitchCloud.context.destination);
 
 var cloud = new PitchCloud.Cloud({
-    frequencies: [220, 330, 440, 550, 660, 770, 880, 990],
-    grainLength: 0.3
+    frequencies: [330, 440, 550, 660, 808],
+    grainLength: 2.0,
+    grainPeriod: 1.0
 }, gainNode);
 
 var playButton = document.getElementsByClassName('play')[0];

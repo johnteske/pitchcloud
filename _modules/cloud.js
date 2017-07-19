@@ -5,6 +5,7 @@ PitchCloud.Cloud = (function() {
         this.frequencies = args.frequencies;
         this.size = this.frequencies.length; // TODO size based on overlaps, not freqs
         this.grainLength = args.grainLength || 4.0;
+        this.grainPeriod = args.grainPeriod || 2.0;
 
         /**
          * Initialize Grains
@@ -13,7 +14,9 @@ PitchCloud.Cloud = (function() {
         this._grains = [];
 
         for (var i = 0; i < this.size; i++) {
-            this._grains.push(new PitchCloud.Grain({}, out));
+            this._grains.push(new PitchCloud.Grain({
+                grainLength: this.grainLength
+            }, out));
         }
 
         this._currentGrainIndex = 0;
@@ -35,7 +38,6 @@ PitchCloud.Cloud = (function() {
                 });
 
             self.frequencies = frequencies;
-            console.log(self.frequencies, frequencies);
         });
         controls.container.appendChild(controls.frequencyInput);
 
@@ -45,7 +47,7 @@ PitchCloud.Cloud = (function() {
 
     Cloud.prototype._schedule = function(immediate) {
         var self = this,
-            delay = immediate ? 0 : self.grainLength * 1000,
+            delay = immediate ? 0 : self.grainPeriod * 1000,
             thisGrain = self._grains[self._currentGrainIndex];
 
         this._timeout = setTimeout(function() {
