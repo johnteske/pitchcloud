@@ -26,10 +26,15 @@ PitchCloud.Cloud = (function() {
          */
 
         var controls = this.controls = {}
+
+        var template = document.getElementById('cloud-template');
+        var templateHTML = template.innerHTML;
+
         controls.container = document.createElement('div');
         controls.container.className = 'cloud';
+        controls.container.innerHTML = templateHTML;
 
-        controls.frequencyInput = document.createElement('input');
+        controls.frequencyInput = controls.container.getElementsByTagName('input')[0];
         controls.frequencyInput.value = this.frequencies;
         controls.frequencyInput.addEventListener('change', function() {
             var frequencies = this.value.split(',')
@@ -39,7 +44,6 @@ PitchCloud.Cloud = (function() {
 
             self.frequencies = frequencies;
         });
-        controls.container.appendChild(controls.frequencyInput);
 
         document.getElementsByClassName('clouds')[0]
             .appendChild(controls.container);
