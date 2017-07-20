@@ -1,7 +1,9 @@
 ---
 ---
-html {
+html,
+input, button {
     font-family: monospace;
+    font-size: 13px;
 }
 
 .clouds {
@@ -12,6 +14,14 @@ html {
     display: inline-block;
     border: 1px solid black;
     padding: 1em;
+
+    header {
+        font-weight: bold;
+    }
+
+    input {
+        margin: 0.5em 0 0 0;
+    }
 }
 
 button {

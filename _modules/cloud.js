@@ -34,16 +34,21 @@ PitchCloud.Cloud = (function() {
         controls.container.className = 'cloud';
         controls.container.innerHTML = templateHTML;
 
-        controls.frequencyInput = controls.container.getElementsByTagName('input')[0];
-        controls.frequencyInput.value = this.frequencies;
-        controls.frequencyInput.addEventListener('change', function() {
+        controls.frequency = controls.container.getElementsByClassName('frequencies')[0];
+        controls.frequency.value = this.frequencies;
+        controls.frequency.addEventListener('change', function() {
             var frequencies = this.value.split(',')
                 .map(function(f) {
                     return +f;
                 });
-
             self.frequencies = frequencies;
         });
+
+        controls.period = controls.container.getElementsByClassName('period')[0];
+        controls.period.value = this.grainPeriod;
+
+        controls.duration = controls.container.getElementsByClassName('duration')[0];
+        controls.duration.value = this.grainLength;
 
         document.getElementsByClassName('clouds')[0]
             .appendChild(controls.container);
