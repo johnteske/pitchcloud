@@ -46,6 +46,9 @@ PitchCloud.Cloud = (function() {
 
         controls.period = controls.container.getElementsByClassName('period')[0];
         controls.period.value = this.grainPeriod;
+        controls.period.addEventListener('change', function() {
+            self.grainPeriod = this.value;
+        });
 
         controls.duration = controls.container.getElementsByClassName('duration')[0];
         controls.duration.value = this.grainLength;
