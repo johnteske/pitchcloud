@@ -52,6 +52,9 @@ PitchCloud.Cloud = (function() {
 
         controls.duration = controls.container.getElementsByClassName('duration')[0];
         controls.duration.value = this.grainLength;
+        controls.duration.addEventListener('change', function() {
+            self.grainLength = this.value;
+        });
 
         document.getElementsByClassName('clouds')[0]
             .appendChild(controls.container);
@@ -67,6 +70,7 @@ PitchCloud.Cloud = (function() {
                 frequency = self.frequencies[randomIndex];
 
             thisGrain.vco.setFrequency(frequency);
+            thisGrain.envelope.setLength(self.grainLength);
             thisGrain.envelope.trigger();
 
             self._schedule();
