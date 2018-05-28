@@ -82,6 +82,7 @@ PitchCloud.Cloud = (function() {
 
     Cloud.prototype.start = function() {
         this._schedule(true);
+        PitchCloud.masterGainNode.gain.linearRampToValueAtTime(PitchCloud.masterLevel, PitchCloud.context.currentTime + (PitchCloud.masterLag / 1000));
     };
 
     Cloud.prototype.stop = function() {
@@ -91,6 +92,7 @@ PitchCloud.Cloud = (function() {
                 this._grains[i].envelope.cancel();
             }
         }, PitchCloud.masterLag);
+        PitchCloud.masterGainNode.gain.linearRampToValueAtTime(0, PitchCloud.context.currentTime + (PitchCloud.masterLag / 1000));
     }
 
     return Cloud;
