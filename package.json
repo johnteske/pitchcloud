@@ -1,0 +1,32 @@
+{
+  "name": "pitchcloud",
+  "version": "1.0.0",
+  "description": "WebAudio granular synthesizer",
+  "scripts": {
+    "build": "npm run sass && eleventy",
+    "sass": "sass assets/main.scss assets/main.css",
+    "tsc": "tsc src/index.ts --outDir assets",
+    "watch:eleventy": "eleventy --serve",
+    "watch:sass": "npm run sass -- --watch",
+    "start": "npm-run-all sass --parallel watch:*",
+    "deploy": "npm run build && gh-pages -d _site",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnteske/pitchcloud.git"
+  },
+  "author": "John Teske",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnteske/pitchcloud/issues"
+  },
+  "homepage": "https://github.com/johnteske/pitchcloud#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.5",
+    "sass": "^1.26.8",
+    "typescript": "^3.9.5"
+  }
+}

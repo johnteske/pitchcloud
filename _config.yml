@@ -1,5 +1,0 @@
-# Build settings
-safe: true
-markdown: kramdown
-sass:
-    style: compressed
